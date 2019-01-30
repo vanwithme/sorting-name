@@ -11,7 +11,7 @@ public class namesorter {
     public static void main(String[] args) {
 
         //Input
-        String inputFile = "unsorted-names-list.txt";
+        String inputFile = "args";
         String line;
         List<Name> nameList = new ArrayList<>();
 
