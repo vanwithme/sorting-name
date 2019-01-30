@@ -13,15 +13,15 @@ meet the following criteria:
 Unit tests should exist.
 - Minimal, practical documentation should exist.
 ## Installation
-### Build and Compile
-If you build code directly, you need JDK installed. For [installtion](https://www.oracle.com/technetwork/java/javase/downloads/index.html).
-Extract the code and compile it
+### Build
+If you build code directly, you need JDK installed. For [installation](https://www.oracle.com/technetwork/java/javase/downloads/index.html). 
+### Compile
+Clone or Download this git after that extract the code and compile it
 ```
 javac -d output src\com\navri\*.java
 ```
 Copy the *unsorted file* at **output** directory
-
-## Run
+### Run
 After that go to output directory
 ```
 cd output
