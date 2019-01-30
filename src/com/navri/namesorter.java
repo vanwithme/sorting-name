@@ -2,6 +2,7 @@ package com.navri;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class namesorter {
@@ -10,16 +11,19 @@ public class namesorter {
     public static void main(String[] args) {
 
         //Input
-        String inputFile = "temp.txt";
+        String inputFile = "unsorted-names-list.txt";
         String line;
-        List<String> nameList = new ArrayList<>();
+        List<Name> nameList = new ArrayList<>();
 
         try {
             FileReader fileReader = new FileReader(inputFile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {
-                nameList.add(line);
+                Name name = new Name();
+                name.setLastName(line.substring(line.lastIndexOf(" ")+1));
+                name.setRestName(line);
+                nameList.add(name);
             }
             bufferedReader.close();
         }
@@ -31,32 +35,18 @@ public class namesorter {
 
         }
 
-        String [] arrayName = nameList.toArray( new String[ nameList.size() ] );
-        String temp;
         //Process
-        for (int i = 0; i < nameList.size()-1; i++) {
-            for (int j = i+1; j < nameList.size(); j++) {
-                String lastWordi = arrayName[i].substring(arrayName[i].lastIndexOf(" ")+1);
-                String lastWordj = arrayName[j].substring(arrayName[j].lastIndexOf(" ")+1);
-                String combineI = lastWordi+" "+arrayName[i];
-                String combineJ = lastWordj+" "+arrayName[j];
-                if (combineI.compareTo(combineJ)>0) {
-                    temp = arrayName[i];
-                    arrayName[i] = arrayName[j];
-                    arrayName[j] = temp;
-                }
-            }
-        }
-        
+        Collections.sort(nameList,Name.comByLast);
+
         //Output
-        String outputFile = "result.txt";
+        String outputFile = "sorted-names-list.txt";
 
         try {
             FileWriter fileWriter = new FileWriter(outputFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for (String item : arrayName) {
-                bufferedWriter.write(item);
+            for (Name item : nameList) {
+                bufferedWriter.write(item.getRestName());
                 bufferedWriter.newLine();
             }
 
@@ -66,8 +56,8 @@ public class namesorter {
             System.out.println("Error writing to file '"+ outputFile + "'");
         }
 
-        for (String item : arrayName) {
-            System.out.println(item);
+        for (Name item : nameList) {
+            System.out.println(item.getRestName());
         }
     }
 }
